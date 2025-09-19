@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduFic - Educação Financeira</title>
+     <link rel="stylesheet" href="TCC.css">
+  
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💰 EduFic</h1>
+            <p>Sua jornada para a independência financeira começa aqui!</p>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="showSection('conceitos')">Conceitos Básicos</button>
+            <button class="nav-btn" onclick="showSection('situacao')">Situação Atual</button>
+            <button class="nav-btn" onclick="showSection('contabilidade')">Contabilidade Pessoal</button>
+            <button class="nav-btn" onclick="showSection('fluxo')">Fluxo de Caixa</button>
+            <button class="nav-btn" onclick="showSection('objetivos')">Objetivos & Investimentos</button>
+        </div>
+
+        <!-- Conceitos Fundamentais -->
+        <div id="conceitos" class="section active">
+            <h2>💡 Conceitos Fundamentais</h2>
+            
+            <div class="concept-grid">
+                <div class="concept-card" onclick="showConceptDetails('receitas')">
+                    <h3>💵 Receitas</h3>
+                    <p>Todo dinheiro que ENTRA no seu bolso</p>
+                </div>
+                <div class="concept-card" onclick="showConceptDetails('despesas')">
+                    <h3>💸 Despesas</h3>
+                    <p>Todo dinheiro que SAI do seu bolso</p>
+                </div>
+                <div class="concept-card" onclick="showConceptDetails('ativos')">
+                    <h3>📈 Ativos</h3>
+                    <p>Coisas que COLOCAM dinheiro no seu bolso</p>
+                </div>
+                <div class="concept-card" onclick="showConceptDetails('passivos')">
+                    <h3>📉 Passivos</h3>
+                    <p>Coisas que TIRAM dinheiro do seu bolso</p>
+                </div>
+            </div>
+
+            <div id="concept-details" style="display: none;">
+                <div class="calculator">
+                    <h3 id="concept-title"></h3>
+                    <div id="concept-content"></div>
+                </div>
+            </div>
+
+            <div class="quiz">
+                <div class="quiz-question">🎯 Quiz: Um smartphone comprado a prazo é considerado:</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkQuiz(this, false)">Um ativo, pois é útil</div>
+                    <div class="quiz-option" onclick="checkQuiz(this, true)">Um passivo, pois gera despesas mensais</div>
+                    <div class="quiz-option" onclick="checkQuiz(this, false)">Uma receita, pois facilita o trabalho</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Situação Financeira Atual -->
+        <div id="situacao" class="section">
+            <h2>📊 Situação Financeira Atual</h2>
+            
+            <div class="tips">
+                <h4>💡 Por que é importante?</h4>
+                <p>Conhecer sua situação financeira é como ter um GPS financeiro - você precisa saber onde está para chegar onde quer!</p>
+            </div>
+
+            <div class="calculator">
+                <h3>💰 Análise de Receitas</h3>
+                <div class="input-group">
+                    <label>Mesada/Trabalho (mensal):</label>
+                    <input type="number" id="receita-principal" placeholder="R$ 0,00">
+                </div>
+                <div class="input-group">
+                    <label>Outras receitas:</label>
+                    <input type="number" id="outras-receitas" placeholder="R$ 0,00">
+                </div>
+                <button class="btn" onclick="calcularReceitas()">Calcular Total</button>
+                <div id="resultado-receitas" class="result"></div>
+            </div>
+
+            <div class="calculator">
+                <h3>💸 Levantamento de Despesas</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <h4>Despesas Fixas (todo mês)</h4>
+                        <div class="input-group">
+                            <label>Transporte:</label>
+                            <input type="number" id="transporte" placeholder="R$ 0,00">
+                        </div>
+                        <div class="input-group">
+                            <label>Celular:</label>
+                            <input type="number" id="celular" placeholder="R$ 0,00">
+                        </div>
+                        <div class="input-group">
+                            <label>Streaming/Apps:</label>
+                            <input type="number" id="streaming" placeholder="R$ 0,00">
+                        </div>
+                    </div>
+                    <div>
+                        <h4>Despesas Variáveis</h4>
+                        <div class="input-group">
+                            <label>Alimentação:</label>
+                            <input type="number" id="alimentacao" placeholder="R$ 0,00">
+                        </div>
+                        <div class="input-group">
+                            <label>Lazer:</label>
+                            <input type="number" id="lazer" placeholder="R$ 0,00">
+                        </div>
+                        <div class="input-group">
+                            <label>Roupas/Compras:</label>
+                            <input type="number" id="compras" placeholder="R$ 0,00">
+                        </div>
+                    </div>
+                </div>
+                <button class="btn" onclick="analisarDespesas()">Analisar Despesas</button>
+                <div id="analise-despesas" class="result"></div>
+            </div>
+        </div>
+
+        <!-- Contabilidade Pessoal -->
+        <div id="contabilidade" class="section">
+            <h2>📋 Contabilidade Pessoal</h2>
+            
+            <div class="calculator">
+                <h3>💰 Calculadora de Juros</h3>
+                <p>Veja o REAL custo de uma compra parcelada!</p>
+                <div class="input-group">
+                    <label>Valor do produto:</label>
+                    <input type="number" id="valor-produto" placeholder="R$ 1000">
+                </div>
+                <div class="input-group">
+                    <label>Juros mensais (%):</label>
+                    <input type="number" id="taxa-juros" placeholder="2.5" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label>Número de parcelas:</label>
+                    <input type="number" id="parcelas" placeholder="12">
+                </div>
+                <button class="btn" onclick="calcularJuros()">Calcular Juros</button>
+                <div id="resultado-juros" class="result"></div>
+            </div>
+
+            <div class="tips">
+                <h4>🥇 Regra de Ouro: Pague-se Primeiro!</h4>
+                <p>Antes de gastar com qualquer coisa, separe uma parte para VOCÊ (poupança/investimento). Mesmo que seja R$ 10, comece hoje!</p>
+            </div>
+
+            <div class="calculator">
+                <h3>😊 Conta da Felicidade</h3>
+                <p>Reserve uma parte da sua renda para gastos que te fazem feliz, sem culpa!</p>
+                <div class="input-group">
+                    <label>Sua renda mensal:</label>
+                    <input type="number" id="renda-felicidade" placeholder="R$ 500">
+                </div>
+                <button class="btn" onclick="calcularContaFelicidade()">Calcular Conta da Felicidade</button>
+                <div id="resultado-felicidade" class="result"></div>
+            </div>
+        </div>
+
+        <!-- Fluxo de Caixa -->
+        <div id="fluxo" class="section">
+            <h2>📈 Fluxo de Caixa</h2>
+            
+            <div class="tips">
+                <h4>🤔 O que é Fluxo de Caixa?</h4>
+                <p>É um "filme" do seu dinheiro: mostra tudo que entra e sai, quando entra e sai. É sua bússola financeira!</p>
+            </div>
+
+            <div class="calculator">
+                <h3>💹 Seu Fluxo de Caixa Mensal</h3>
+                <div id="fluxo-entradas">
+                    <h4>💵 Entradas</h4>
+                    <div id="lista-entradas"></div>
+                    <button class="btn" onclick="adicionarEntrada()">+ Adicionar Entrada</button>
+                </div>
+                
+                <div id="fluxo-saidas">
+                    <h4>💸 Saídas</h4>
+                    <div id="lista-saidas"></div>
+                    <button class="btn" onclick="adicionarSaida()">+ Adicionar Saída</button>
+                </div>
+                
+                <button class="btn" onclick="calcularFluxo()">📊 Calcular Fluxo</button>
+                <div id="resultado-fluxo" class="result"></div>
+            </div>
+
+            <div class="calculator">
+                <h3>🆘 Reserva de Emergência</h3>
+                <p>Sua reserva deve cobrir de 3 a 6 meses dos seus gastos essenciais</p>
+                <div class="input-group">
+                    <label>Seus gastos mensais essenciais:</label>
+                    <input type="number" id="gastos-essenciais" placeholder="R$ 300">
+                </div>
+                <button class="btn" onclick="calcularReserva()">Calcular Reserva Ideal</button>
+                <div id="resultado-reserva" class="result"></div>
+            </div>
+        </div>
+
+        <!-- Objetivos e Investimentos -->
+        <div id="objetivos" class="section">
+            <h2>🎯 Objetivos & Investimentos</h2>
+            
+            <div class="calculator">
+                <h3>🎯 Definindo Objetivos Financeiros</h3>
+                <div class="input-group">
+                    <label>Seu objetivo (ex: iPhone, viagem, curso):</label>
+                    <input type="text" id="nome-objetivo" placeholder="Meu objetivo">
+                </div>
+                <div class="input-group">
+                    <label>Valor necessário:</label>
+                    <input type="number" id="valor-objetivo" placeholder="R$ 2000">
+                </div>
+                <div class="input-group">
+                    <label>Em quantos meses quer alcançar:</label>
+                    <input type="number" id="prazo-objetivo" placeholder="12">
+                </div>
+                <button class="btn" onclick="calcularObjetivo()">Calcular Meta Mensal</button>
+                <div id="resultado-objetivo" class="result"></div>
+            </div>
+
+            <div class="tips">
+                <h4>💰 Quanto Investir?</h4>
+                <p>Regra prática: invista pelo menos 10% da sua renda. Se recebe R$ 500, invista R$ 50. Comece pequeno, mas comece!</p>
+            </div>
+
+            <div class="calculator">
+                <h3>⚖️ Investir X Ganhar Mais</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <h4>💹 Opção 1: Investir</h4>
+                        <div class="input-group">
+                            <label>Valor a investir:</label>
+                            <input type="number" id="valor-investir" placeholder="R$ 100">
+                        </div>
+                        <div class="input-group">
+                            <label>Rendimento mensal (%):</label>
+                            <input type="number" id="rendimento" placeholder="0.8" step="0.1">
+                        </div>
+                        <div class="input-group">
+                            <label>Por quantos meses:</label>
+                            <input type="number" id="meses-investir" placeholder="12">
+                        </div>
+                    </div>
+                    <div>
+                        <h4>💪 Opção 2: Ganhar Mais</h4>
+                        <div class="input-group">
+                            <label>Renda extra mensal:</label>
+                            <input type="number" id="renda-extra" placeholder="R$ 100">
+                        </div>
+                        <div class="input-group">
+                            <label>Por quantos meses:</label>
+                            <input type="number" id="meses-renda" placeholder="12">
+                        </div>
+                    </div>
+                </div>
+                <button class="btn" onclick="compararOpcoes()">Comparar Opções</button>
+                <div id="resultado-comparacao" class="result"></div>
+            </div>
+
+            <div class="calculator">
+                <h3>🏆 Caminho para Independência Financeira</h3>
+                <p>Independência financeira = ter renda passiva que cubra seus gastos</p>
+                <div class="input-group">
+                    <label>Seus gastos mensais totais:</label>
+                    <input type="number" id="gastos-totais" placeholder="R$ 1000">
+                </div>
+                <div class="input-group">
+                    <label>Quanto consegue investir por mês:</label>
+                    <input type="number" id="valor-mensal-investir" placeholder="R$ 200">
+                </div>
+                <button class="btn" onclick="calcularIndependencia()">Calcular Independência</button>
+                <div id="resultado-independencia" class="result"></div>
+            </div>
+        </div>
+    </div>
+<script src="TCC.js"></script>
