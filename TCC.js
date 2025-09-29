@@ -205,7 +205,7 @@ let entradas = [];
                 <p style="margin-top: 15px; font-weight: bold; color: #e53e3e;">
                     💸 Você pagará R$ ${jurosTotal.toFixed(2)} A MAIS só de juros!
                 </p>
-                ${jurosTotal > valorProduto * 50 ? 
+                ${jurosTotal > valorProduto * 0.3 ? 
                     '<p style="color: red;">🚨 CUIDADO! Os juros são muito altos!</p>' : 
                     '<p style="color: orange;">⚠️ Avalie se vale a pena parcelar.</p>'
                 }
