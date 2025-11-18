@@ -3,281 +3,759 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduFic - Educação Financeira.</title>
-     <link rel="stylesheet" href="TCC.css">
-  
+    <title>EduFic - Educação Financeira</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="TCC.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>💰 EduFic</h1>
-            <p>Sua jornada para a independência financeira começa aqui!</p>
-        </div>
-
-        <div class="nav-buttons">
-            <button class="nav-btn active" onclick="showSection('conceitos')">Conceitos Básicos</button>
-            <button class="nav-btn" onclick="showSection('situacao')">Situação Atual</button>
-            <button class="nav-btn" onclick="showSection('contabilidade')">Contabilidade Pessoal</button>
-            <button class="nav-btn" onclick="showSection('fluxo')">Fluxo de Caixa</button>
-            <button class="nav-btn" onclick="showSection('objetivos')">Objetivos & Investimentos</button>
-        </div>
-
-        <!-- Conceitos Fundamentais -->
-        <div id="conceitos" class="section active">
-            <h2>💡 Conceitos Fundamentais</h2>
-            
-            <div class="concept-grid">
-                <div class="concept-card" onclick="showConceptDetails('receitas')">
-                    <h3>💵 Receitas</h3>
-                    <p>Todo dinheiro que ENTRA no seu bolso</p>
-                </div>
-                <div class="concept-card" onclick="showConceptDetails('despesas')">
-                    <h3>💸 Despesas</h3>
-                    <p>Todo dinheiro que SAI do seu bolso</p>
-                </div>
-                <div class="concept-card" onclick="showConceptDetails('ativos')">
-                    <h3>📈 Ativos</h3>
-                    <p>Coisas que COLOCAM dinheiro no seu bolso</p>
-                </div>
-                <div class="concept-card" onclick="showConceptDetails('passivos')">
-                    <h3>📉 Passivos</h3>
-                    <p>Coisas que TIRAM dinheiro do seu bolso</p>
-                </div>
-            </div>
-
-            <div id="concept-details" style="display: none;">
-                <div class="calculator">
-                    <h3 id="concept-title"></h3>
-                    <div id="concept-content"></div>
-                </div>
-            </div>
-
-            <div class="quiz">
-                <div class="quiz-question">🎯 Quiz: Um smartphone comprado a prazo é considerado:</div>
-                <div class="quiz-options">
-                    <div class="quiz-option" onclick="checkQuiz(this, false)">Um ativo, pois é útil</div>
-                    <div class="quiz-option" onclick="checkQuiz(this, true)">Um passivo, pois gera despesas mensais</div>
-                    <div class="quiz-option" onclick="checkQuiz(this, false)">Uma receita, pois facilita o trabalho</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Situação Financeira Atual -->
-        <div id="situacao" class="section">
-            <h2>📊 Situação Financeira Atual</h2>
-            
-            <div class="tips">
-                <h4>💡 Por que é importante?</h4>
-                <p>Conhecer sua situação financeira é como ter um GPS financeiro - você precisa saber onde está para chegar onde quer!</p>
-            </div>
-
-            <div class="calculator">
-                <h3>💰 Análise de Receitas</h3>
-                <div class="input-group">
-                    <label>Mesada/Trabalho (mensal):</label>
-                    <input type="number" id="receita-principal" placeholder="R$ 0,00">
-                </div>
-                <div class="input-group">
-                    <label>Outras receitas:</label>
-                    <input type="number" id="outras-receitas" placeholder="R$ 0,00">
-                </div>
-                <button class="btn" onclick="calcularReceitas()">Calcular Total</button>
-                <div id="resultado-receitas" class="result"></div>
-            </div>
-
-            <div class="calculator">
-                <h3>💸 Levantamento de Despesas</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div>
-                        <h4>Despesas Fixas (todo mês)</h4>
-                        <div class="input-group">
-                            <label>Transporte:</label>
-                            <input type="number" id="transporte" placeholder="R$ 0,00">
-                        </div>
-                        <div class="input-group">
-                            <label>Celular:</label>
-                            <input type="number" id="celular" placeholder="R$ 0,00">
-                        </div>
-                        <div class="input-group">
-                            <label>Streaming/Apps:</label>
-                            <input type="number" id="streaming" placeholder="R$ 0,00">
-                        </div>
+    <!-- Login Screen -->
+    <div class="login-container" id="loginScreen">
+        <div class="login-wrapper">
+            <div class="login-header">
+                <div class="login-logo-wrapper">
+                    <div class="login-logo">
+                        <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <div>
-                        <h4>Despesas Variáveis</h4>
-                        <div class="input-group">
-                            <label>Alimentação:</label>
-                            <input type="number" id="alimentacao" placeholder="R$ 0,00">
-                        </div>
-                        <div class="input-group">
-                            <label>Lazer:</label>
-                            <input type="number" id="lazer" placeholder="R$ 0,00">
-                        </div>
-                        <div class="input-group">
-                            <label>Roupas/Compras:</label>
-                            <input type="number" id="compras" placeholder="R$ 0,00">
-                        </div>
+                    <div class="login-title-wrapper">
+                        <h1>EduFic</h1>
+                        <p>Plataforma de Educação Financeira</p>
                     </div>
                 </div>
-                <button class="btn" onclick="analisarDespesas()">Analisar Despesas</button>
-                <div id="analise-despesas" class="result"></div>
-            </div>
-        </div>
-
-        <!-- Contabilidade Pessoal -->
-        <div id="contabilidade" class="section">
-            <h2>📋 Contabilidade Pessoal</h2>
-            
-            <div class="calculator">
-                <h3>💰 Calculadora de Juros</h3>
-                <p>Veja o REAL custo de uma compra parcelada!</p>
-                <div class="input-group">
-                    <label>Valor do produto:</label>
-                    <input type="number" id="valor-produto" placeholder="R$ 1000">
-                </div>
-                <div class="input-group">
-                    <label>Juros mensais (%):</label>
-                    <input type="number" id="taxa-juros" placeholder="2.5" step="0.1">
-                </div>
-                <div class="input-group">
-                    <label>Número de parcelas:</label>
-                    <input type="number" id="parcelas" placeholder="12">
-                </div>
-                <button class="btn" onclick="calcularJuros()">Calcular Juros</button>
-                <div id="resultado-juros" class="result"></div>
             </div>
 
-            <div class="tips">
-                <h4>🥇 Regra de Ouro: Pague-se Primeiro!</h4>
-                <p>Antes de gastar com qualquer coisa, separe uma parte para VOCÊ (poupança/investimento). Mesmo que seja R$ 10, comece hoje!</p>
-            </div>
-
-            <div class="calculator">
-                <h3>😊 Conta da Felicidade</h3>
-                <p>Reserve uma parte da sua renda para gastos que te fazem feliz, sem culpa!</p>
-                <div class="input-group">
-                    <label>Sua renda mensal:</label>
-                    <input type="number" id="renda-felicidade" placeholder="R$ 500">
-                </div>
-                <button class="btn" onclick="calcularContaFelicidade()">Calcular Conta da Felicidade</button>
-                <div id="resultado-felicidade" class="result"></div>
-            </div>
-        </div>
-
-        <!-- Fluxo de Caixa -->
-        <div id="fluxo" class="section">
-            <h2>📈 Fluxo de Caixa</h2>
-            
-            <div class="tips">
-                <h4>🤔 O que é Fluxo de Caixa?</h4>
-                <p>É um "filme" do seu dinheiro: mostra tudo que entra e sai, quando entra e sai. É sua bússola financeira!</p>
-            </div>
-
-            <div class="calculator">
-                <h3>💹 Seu Fluxo de Caixa Mensal</h3>
-                <div id="fluxo-entradas">
-                    <h4>💵 Entradas</h4>
-                    <div id="lista-entradas"></div>
-                    <button class="btn" onclick="adicionarEntrada()">+ Adicionar Entrada</button>
-                </div>
+            <div class="login-card">
+                <h2>Entrar na Sala</h2>
                 
-                <div id="fluxo-saidas">
-                    <h4>💸 Saídas</h4>
-                    <div id="lista-saidas"></div>
-                    <button class="btn" onclick="adicionarSaida()">+ Adicionar Saída</button>
+                <div class="form-group-login">
+                    <label>Tipo de Usuário</label>
+                    <select id="userType">
+                        <option value="student">Aluno</option>
+                        <option value="teacher">Professor</option>
+                    </select>
                 </div>
-                
-                <button class="btn" onclick="calcularFluxo()">📊 Calcular Fluxo</button>
-                <div id="resultado-fluxo" class="result"></div>
-            </div>
 
-            <div class="calculator">
-                <h3>🆘 Reserva de Emergência</h3>
-                <p>Sua reserva deve cobrir de 3 a 6 meses dos seus gastos essenciais</p>
-                <div class="input-group">
-                    <label>Seus gastos mensais essenciais:</label>
-                    <input type="number" id="gastos-essenciais" placeholder="R$ 300">
+                <div class="form-group-login">
+                    <label>Nome Completo</label>
+                    <input type="text" id="fullName" placeholder="Seu nome completo">
                 </div>
-                <button class="btn" onclick="calcularReserva()">Calcular Reserva Ideal</button>
-                <div id="resultado-reserva" class="result"></div>
-            </div>
-        </div>
 
-        <!-- Objetivos e Investimentos -->
-        <div id="objetivos" class="section">
-            <h2>🎯 Objetivos & Investimentos</h2>
-            
-            <div class="calculator">
-                <h3>🎯 Definindo Objetivos Financeiros</h3>
-                <div class="input-group">
-                    <label>Seu objetivo (ex: iPhone, viagem, curso):</label>
-                    <input type="text" id="nome-objetivo" placeholder="Meu objetivo">
+                <div class="form-group-login">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="seu@email.com">
                 </div>
-                <div class="input-group">
-                    <label>Valor necessário:</label>
-                    <input type="number" id="valor-objetivo" placeholder="R$ 2000">
-                </div>
-                <div class="input-group">
-                    <label>Em quantos meses quer alcançar:</label>
-                    <input type="number" id="prazo-objetivo" placeholder="12">
-                </div>
-                <button class="btn" onclick="calcularObjetivo()">Calcular Meta Mensal</button>
-                <div id="resultado-objetivo" class="result"></div>
-            </div>
 
-            <div class="tips">
-                <h4>💰 Quanto Investir?</h4>
-                <p>Regra prática: invista pelo menos 10% da sua renda. Se recebe R$ 500, invista R$ 50. Comece pequeno, mas comece!</p>
-            </div>
+                <div class="form-group-login">
+                    <label>Código da Sala</label>
+                    <input type="text" id="classCode" placeholder="Ex: EDUFIC2025" style="text-transform: uppercase;">
+                </div>
 
-            <div class="calculator">
-                <h3>⚖️ Investir X Ganhar Mais</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div>
-                        <h4>💹 Opção 1: Investir</h4>
-                        <div class="input-group">
-                            <label>Valor a investir:</label>
-                            <input type="number" id="valor-investir" placeholder="R$ 100">
-                        </div>
-                        <div class="input-group">
-                            <label>Rendimento mensal (%):</label>
-                            <input type="number" id="rendimento" placeholder="0.8" step="0.1">
-                        </div>
-                        <div class="input-group">
-                            <label>Por quantos meses:</label>
-                            <input type="number" id="meses-investir" placeholder="12">
-                        </div>
-                    </div>
-                    <div>
-                        <h4>💪 Opção 2: Ganhar Mais</h4>
-                        <div class="input-group">
-                            <label>Renda extra mensal:</label>
-                            <input type="number" id="renda-extra" placeholder="R$ 100">
-                        </div>
-                        <div class="input-group">
-                            <label>Por quantos meses:</label>
-                            <input type="number" id="meses-renda" placeholder="12">
-                        </div>
-                    </div>
-                </div>
-                <button class="btn" onclick="compararOpcoes()">Comparar Opções</button>
-                <div id="resultado-comparacao" class="result"></div>
-            </div>
-
-            <div class="calculator">
-                <h3>🏆 Caminho para Independência Financeira</h3>
-                <p>Independência financeira = ter renda passiva que cubra seus gastos</p>
-                <div class="input-group">
-                    <label>Seus gastos mensais totais:</label>
-                    <input type="number" id="gastos-totais" placeholder="R$ 1000">
-                </div>
-                <div class="input-group">
-                    <label>Quanto consegue investir por mês:</label>
-                    <input type="number" id="valor-mensal-investir" placeholder="R$ 200">
-                </div>
-                <button class="btn" onclick="calcularIndependencia()">Calcular Independência</button>
-                <div id="resultado-independencia" class="result"></div>
+                <button class="btn-login" id="loginBtn">Entrar</button>
             </div>
         </div>
     </div>
-<script src="TCC.js"></script>
+
+    <!-- App Container -->
+    <div class="app-container" id="appContainer">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="sidebar-title">
+                    <h2>EduFic</h2>
+                </div>
+            </div>
+
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h3 id="userName">Usuário</h3>
+                    <p id="userEmail">email@exemplo.com</p>
+                </div>
+            </div>
+
+            <div class="classroom-code">
+                <i class="fas fa-door-open"></i> Sala: <span id="displayClassCode">XXXXX</span>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link active" onclick="showSection('concepts')">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Conceitos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showSection('dashboard')">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showSection('profile')">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Perfil</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showSection('goals')">
+                        <i class="fas fa-bullseye"></i>
+                        <span>Objetivos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showSection('quiz')">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Quizzes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="showSection('ranking')">
+                        <i class="fas fa-trophy"></i>
+                        <span>Ranking</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link logout-link" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Sair</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <div class="top-actions">
+                    <button class="icon-btn" onclick="toggleDarkMode()" title="Alternar modo escuro">
+                        <i class="fas fa-moon" id="darkModeIcon"></i>
+                    </button>
+                    <button class="icon-btn" onclick="toggleNotifications()">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge" id="notifCount">3</span>
+                    </button>
+                    <button class="icon-btn" onclick="toggleSettings()">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Concepts Section -->
+            <section id="concepts" class="section active">
+                <h1 style="color: white; margin-bottom: 30px;">💡 Conceitos Fundamentais de Educação Financeira</h1>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                    <div class="concept-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" onclick="toggleConcept('receitas')">
+                        <div style="font-size: 56px; margin-bottom: 15px;">💵</div>
+                        <h2 style="font-size: 28px; margin-bottom: 10px;">Receitas</h2>
+                        <p style="opacity: 0.9; font-size: 16px;">Dinheiro que ENTRA no seu bolso</p>
+                        <div style="margin-top: 15px; font-size: 14px; opacity: 0.8;">
+                            <i class="fas fa-chevron-down"></i> Clique para saber mais
+                        </div>
+                    </div>
+
+                    <div class="concept-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);" onclick="toggleConcept('despesas')">
+                        <div style="font-size: 56px; margin-bottom: 15px;">💸</div>
+                        <h2 style="font-size: 28px; margin-bottom: 10px;">Despesas</h2>
+                        <p style="opacity: 0.9; font-size: 16px;">Dinheiro que SAI do seu bolso</p>
+                        <div style="margin-top: 15px; font-size: 14px; opacity: 0.8;">
+                            <i class="fas fa-chevron-down"></i> Clique para saber mais
+                        </div>
+                    </div>
+
+                    <div class="concept-card" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);" onclick="toggleConcept('ativos')">
+                        <div style="font-size: 56px; margin-bottom: 15px;">📈</div>
+                        <h2 style="font-size: 28px; margin-bottom: 10px;">Ativos</h2>
+                        <p style="opacity: 0.9; font-size: 16px;">Coisas que COLOCAM dinheiro no bolso</p>
+                        <div style="margin-top: 15px; font-size: 14px; opacity: 0.8;">
+                            <i class="fas fa-chevron-down"></i> Clique para saber mais
+                        </div>
+                    </div>
+
+                    <div class="concept-card" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);" onclick="toggleConcept('passivos')">
+                        <div style="font-size: 56px; margin-bottom: 15px;">📉</div>
+                        <h2 style="font-size: 28px; margin-bottom: 10px;">Passivos</h2>
+                        <p style="opacity: 0.9; font-size: 16px;">Coisas que TIRAM dinheiro do bolso</p>
+                        <div style="margin-top: 15px; font-size: 14px; opacity: 0.8;">
+                            <i class="fas fa-chevron-down"></i> Clique para saber mais
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Concept Details (Receitas, Despesas, Ativos, Passivos) -->
+                <div id="conceptReceitas" class="concept-detail">
+                    <h2 style="color: var(--success); margin-bottom: 20px;">💵 Receitas - Todo dinheiro que ENTRA</h2>
+                    
+                    <div style="background: #e6ffed; padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--success);">
+                        <h3 style="margin-bottom: 10px;">📚 O que são Receitas?</h3>
+                        <p style="line-height: 1.8; color: var(--dark);">
+                            Receitas são todo o dinheiro que você recebe. É a origem do seu poder financeiro! 
+                            Quanto mais receitas você tem, maior é sua capacidade de poupar e investir.
+                        </p>
+                    </div>
+
+                    <h3 style="margin: 25px 0 15px; color: var(--dark);">💰 Exemplos de Receitas:</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px;">
+                        <div style="background: var(--light); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 32px; margin-bottom: 10px;">💵</div>
+                            <strong>Mesada</strong>
+                            <p style="font-size: 14px; color: #6c809e; margin-top: 5px;">Dinheiro regular dos pais</p>
+                        </div>
+                        <div style="background: var(--light); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 32px; margin-bottom: 10px;">💼</div>
+                            <strong>Trabalho</strong>
+                            <p style="font-size: 14px; color: #6c809e; margin-top: 5px;">Part-time, freelance</p>
+                        </div>
+                        <div style="background: var(--light); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 32px; margin-bottom: 10px;">🎂</div>
+                            <strong>Presentes</strong>
+                            <p style="font-size: 14px; color: #6c809e; margin-top: 5px;">Aniversário, festas</p>
+                        </div>
+                        <div style="background: var(--light); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 32px; margin-bottom: 10px;">🛍️</div>
+                            <strong>Vendas</strong>
+                            <p style="font-size: 14px; color: #6c809e; margin-top: 5px;">Produtos, serviços</p>
+                        </div>
+                    </div>
+
+                    <div style="background: #fff5e6; padding: 20px; border-radius: 12px; border-left: 4px solid var(--warning);">
+                        <h3 style="color: var(--warning); margin-bottom: 10px;">💡 Dica de Ouro:</h3>
+                        <p style="line-height: 1.8; color: var(--dark);">
+                            Para aumentar suas receitas: desenvolva habilidades valiosas, ofereça serviços (aulas particulares, design, programação), 
+                            venda produtos artesanais ou procure trabalhos compatíveis com seus estudos!
+                        </p>
+                    </div>
+                </div>
+
+                <div id="conceptDespesas" class="concept-detail">
+                    <h2 style="color: var(--danger); margin-bottom: 20px;">💸 Despesas - Todo dinheiro que SAI</h2>
+                    
+                    <div style="background: #ffe6e6; padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--danger);">
+                        <h3 style="margin-bottom: 10px;">📚 O que são Despesas?</h3>
+                        <p style="line-height: 1.8; color: var(--dark);">
+                            Despesas são todos os gastos que você tem. Controlar despesas é tão importante quanto aumentar receitas! 
+                            O segredo está em gastar menos do que você ganha.
+                        </p>
+                    </div>
+
+                    <h3 style="margin: 25px 0 15px; color: var(--dark);">📊 Tipos de Despesas:</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
+                        <div style="background: var(--light); padding: 20px; border-radius: 12px;">
+                            <h4 style="color: var(--primary); margin-bottom: 15px;">🔒 Despesas Fixas (todo mês)</h4>
+                            <ul style="line-height: 2; margin-left: 20px;">
+                                <li>🚌 Transporte escolar</li>
+                                <li>📱 Plano de celular</li>
+                                <li>🎬 Netflix, Spotify</li>
+                                <li>💪 Academia</li>
+                                <li>📚 Material escolar</li>
+                            </ul>
+                        </div>
+                        <div style="background: var(--light); padding: 20px; border-radius: 12px;">
+                            <h4 style="color: var(--warning); margin-bottom: 15px;">📊 Despesas Variáveis (mudam)</h4>
+                            <ul style="line-height: 2; margin-left: 20px;">
+                                <li>🍕 Lanches e comidas</li>
+                                <li>🎮 Jogos e cinema</li>
+                                <li>👕 Roupas e acessórios</li>
+                                <li>🎉 Festas e eventos</li>
+                                <li>🎁 Presentes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="background: #fff2e6; padding: 20px; border-radius: 12px; border-left: 4px solid var(--warning);">
+                        <h3 style="color: var(--warning); margin-bottom: 10px;">⚠️ Atenção às Despesas Variáveis!</h3>
+                        <p style="line-height: 1.8; color: var(--dark);">
+                            As despesas variáveis são as mais perigosas! Aquele lanchinho de R$ 5,00 por dia se torna R$ 150,00 no mês. 
+                            Registre todos os gastos para ter controle total!
+                        </p>
+                    </div>
+                </div>
+
+                <div id="conceptAtivos" class="concept-detail">
+                    <h2 style="color: var(--success); margin-bottom: 20px;">📈 Ativos - Coisas que te fazem GANHAR dinheiro</h2>
+                    
+                    <div style="background: #e6ffed; padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--success);">
+                        <h3 style="margin-bottom: 10px;">📚 O que são Ativos?</h3>
+                        <p style="line-height: 1.8; color: var(--dark);">
+                            Ativos são coisas que colocam dinheiro NO seu bolso! São investimentos e bens que trabalham POR você, 
+                            gerando renda passiva. O segredo da riqueza está em acumular ativos!
+                        </p>
+                    </div>
+
+                    <h3 style="margin: 25px 0 15px; color: var(--dark);">💎 Exemplos de Ativos:</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px;">
+                        <div style="background: var(--light); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 32px; margin-bottom: 10px;">💰</div>
+                            <strong>Poupança/CDB</strong>
+                            <p style="font-size: 14px; color: #6c809e; margin-top: 5px;">Rende juros todo mês</p>
+                        </div>
+                        <div style="background: var(--light); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 32px; margin-bottom: 10px;">📈</div>
+                            <strong>Ações</strong>
+                            <p style="font-size: 14px; color: #6c809e; margin-top: 5px;">Dividendos e valorização</p>
+                        </div>
+                        <div style="background: var(--light); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 32px; margin-bottom: 10px;">📚</div>
+                            <strong>Cursos</strong>
+                            <p style="font-size: 14px; color: #6c809e; margin-top: 5px;">Aumentam sua renda</p>
+                        </div>
+                        <div style="background: var(--light); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 32px; margin-bottom: 10px;">💻</div>
+                            <strong>Negócio Online</strong>
+                            <p style="font-size: 14px; color: #6c809e; margin-top: 5px;">Renda passiva digital</p>
+                        </div>
+                        <div style="background: var(--light); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 32px; margin-bottom: 10px;">📷</div>
+                            <strong>Equipamentos</strong>
+                            <p style="font-size: 14px; color: #6c809e; margin-top: 5px;">Para freelance</p>
+                        </div>
+                        <div style="background: var(--light); padding: 15px; border-radius: 10px;">
+                            <div style="font-size: 32px; margin-bottom: 10px;">🎨</div>
+                            <strong>Habilidades</strong>
+                            <p style="font-size: 14px; color: #6c809e; margin-top: 5px;">Geram oportunidades</p>
+                        </div>
+                    </div>
+
+                    <div style="background: #e6f7ff; padding: 20px; border-radius: 12px; border-left: 4px solid var(--primary);">
+                        <h3 style="color: var(--primary); margin-bottom: 10px;">🎯 Regra de Ouro dos Ricos:</h3>
+                        <p style="line-height: 1.8; color: var(--dark);">
+                            <strong>"Os ricos compram ATIVOS. Os pobres compram PASSIVOS achando que são ativos."</strong><br><br>
+                            Sempre se pergunte: "Isso vai colocar dinheiro no meu bolso ou tirar?" Se for tirar, pense duas vezes antes de comprar!
+                        </p>
+                    </div>
+                </div>
+
+                <div id="conceptPassivos" class="concept-detail">
+                    <h2 style="color: var(--danger); margin-bottom: 20px;">📉 Passivos - Coisas que te fazem PERDER dinheiro</h2>
+                    
+                    <div style="background: #ffe6e6; padding: 20px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--danger);">
+                        <h3 style="margin-bottom: 10px;">📚 O que são Passivos?</h3>
+                        <p style="line-height: 1.8; color: var(--dark);">
+                            Passivos são coisas que tiram dinheiro DO seu bolso! Mesmo que pareçam bons investimentos, 
+                            eles geram gastos contínuos e drenam suas finanças. Cuidado com passivos disfarçados de ativos!
+                        </p>
+                    </div>
+
+                    <h3 style="margin: 25px 0 15px; color: var(--dark);">⚠️ Exemplos de Passivos:</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px;">
+                        <div style="background: var(--light); padding: 15px; border-radius: 10px; border: 2px solid var(--danger);">
+                            <div style="font-size: 32px; margin-bottom: 10px;">📱</div>
+                            <strong>Celular Parcelado</strong>
+                            <p style="font-size: 14px; color: #6c809e; margin-top: 5px;">Parcelas + juros mensais</p>
+                        </div>
+                        <div style="background: var(--light); padding: 15px; border-radius: 10px; border: 2px solid var(--danger);">
+                            <div style="font-size: 32px; margin-bottom: 10px;">💳</div>
+                            <strong>Dívidas</strong>
+                            <p style="font-size: 14px; color: #6c809e; margin-top: 5px;">Juros que crescem</p>
+                        </div>
+                        <div style="background: var(--light); padding: 15px; border-radius: 10px; border: 2px solid var(--danger);">
+                            <div style="font-size: 32px; margin-bottom: 10px;">🚗</div>
+                            <strong>Carro</strong>
+                            <p style="font-size: 14px; color: #6c809e; margin-top: 5px;">IPVA, combustível, manutenção</p>
+                        </div>
+                        <div style="background: var(--light); padding: 15px; border-radius: 10px; border: 2px solid var(--danger);">
+                            <div style="font-size: 32px; margin-bottom: 10px;">🎮</div>
+                            <strong>Assinaturas</strong>
+                            <p style="font-size: 14px; color: #6c809e; margin-top: 5px;">Que você não usa</p>
+                        </div>
+                        <div style="background: var(--light); padding: 15px; border-radius: 10px; border: 2px solid var(--danger);">
+                            <div style="font-size: 32px; margin-bottom: 10px;">👟</div>
+                            <strong>Compras Impulsivas</strong>
+                            <p style="font-size: 14px; color: #6c809e; margin-top: 5px;">Coisas desnecessárias</p>
+                        </div>
+                        <div style="background: var(--light); padding: 15px; border-radius: 10px; border: 2px solid var(--danger);">
+                            <div style="font-size: 32px; margin-bottom: 10px;">🏠</div>
+                            <strong>Casa Própria*</strong>
+                            <p style="font-size: 14px; color: #6c809e; margin-top: 5px;">*Se não gera renda</p>
+                        </div>
+                    </div>
+
+                    <div style="background: #fff2e6; padding: 20px; border-radius: 12px; border-left: 4px solid var(--warning); margin-bottom: 20px;">
+                        <h3 style="color: var(--warning); margin-bottom: 10px;">🚨 Cuidado com Passivos Disfarçados!</h3>
+                        <p style="line-height: 1.8; color: var(--dark);">
+                            Um carro pode parecer útil, mas gasta dinheiro com combustível, seguro, manutenção e desvaloriza. 
+                            Uma casa que você mora é um passivo (não gera renda). Já uma casa alugada é um ativo!
+                        </p>
+                    </div>
+
+                    <div style="background: #e6f7ff; padding: 20px; border-radius: 12px; border-left: 4px solid var(--primary);">
+                        <h3 style="color: var(--primary); margin-bottom: 10px;">💡 Regra Prática Definitiva:</h3>
+                        <p style="line-height: 1.8; color: var(--dark); font-size: 18px;">
+                            <strong>Se algo te faz PAGAR todo mês = PASSIVO ❌</strong><br>
+                            <strong>Se algo te faz RECEBER todo mês = ATIVO ✅</strong>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section">
+                <h1 style="color: white; margin-bottom: 20px;">📊 Meu Painel Financeiro</h1>
+                
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="width: 50px; height: 50px; border-radius: 12px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; font-size: 24px; color: white;">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <div>
+                                    <div style="font-size: 28px; font-weight: 700; color: var(--dark);" id="totalBalance">R$ 0,00</div>
+                                    <div style="font-size: 14px; color: #6c809e;">Saldo Total</div>
+                                </div>
+                            </div>
+                            <button style="background: var(--primary); color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 12px;" onclick="editValue('balance')">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <div style="font-size: 12px; color: #9ca3af; line-height: 1.6;">
+                            É o dinheiro disponível que você tem agora. Calcule: Receitas - Despesas.
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="width: 50px; height: 50px; border-radius: 12px; background: linear-gradient(135deg, #38a169 0%, #48bb78 100%); display: flex; align-items: center; justify-content: center; font-size: 24px; color: white;">
+                                    <i class="fas fa-arrow-down"></i>
+                                </div>
+                                <div>
+                                    <div style="font-size: 28px; font-weight: 700; color: var(--dark);" id="totalIncome">R$ 0,00</div>
+                                    <div style="font-size: 14px; color: #6c809e;">Receitas</div>
+                                </div>
+                            </div>
+                            <button style="background: var(--success); color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 12px;" onclick="editValue('income')">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <div style="font-size: 12px; color: #9ca3af; line-height: 1.6;">
+                            Todo dinheiro que entrou: mesada, trabalhos, vendas, presentes.
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="width: 50px; height: 50px; border-radius: 12px; background: linear-gradient(135deg, #e53e3e 0%, #fc8181 100%); display: flex; align-items: center; justify-content: center; font-size: 24px; color: white;">
+                                    <i class="fas fa-arrow-up"></i>
+                                </div>
+                                <div>
+                                    <div style="font-size: 28px; font-weight: 700; color: var(--dark);" id="totalExpenses">R$ 0,00</div>
+                                    <div style="font-size: 14px; color: #6c809e;">Despesas</div>
+                                </div>
+                            </div>
+                            <button style="background: var(--danger); color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 12px;" onclick="editValue('expenses')">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <div style="font-size: 12px; color: #9ca3af; line-height: 1.6;">
+                            Todo dinheiro que saiu: compras, lanches, transporte, entretenimento.
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <div style="width: 50px; height: 50px; border-radius: 12px; background: linear-gradient(135deg, #ff9500 0%, #ffa726 100%); display: flex; align-items: center; justify-content: center; font-size: 24px; color: white;">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <div style="font-size: 28px; font-weight: 700; color: var(--dark);" id="savingsRate">0%</div>
+                                <div style="font-size: 14px; color: #6c809e;">Taxa de Poupança</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 12px; color: #9ca3af; line-height: 1.6;">
+                            Quanto você economiza das suas receitas. Ideal: acima de 10%!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card" style="margin-bottom: 20px;">
+                    <h3 style="margin-bottom: 20px;">✏️ Adicionar Despesas por Categoria</h3>
+                    <div class="category-grid">
+                        <div class="category-item">
+                            <div style="font-size: 40px; margin-bottom: 10px;">🍔</div>
+                            <strong>Alimentação</strong>
+                            <input type="number" id="catFood" placeholder="R$ 0,00" oninput="updateCategoryChart()">
+                        </div>
+                        <div class="category-item">
+                            <div style="font-size: 40px; margin-bottom: 10px;">🚌</div>
+                            <strong>Transporte</strong>
+                            <input type="number" id="catTransport" placeholder="R$ 0,00" oninput="updateCategoryChart()">
+                        </div>
+                        <div class="category-item">
+                            <div style="font-size: 40px; margin-bottom: 10px;">🎮</div>
+                            <strong>Lazer</strong>
+                            <input type="number" id="catLeisure" placeholder="R$ 0,00" oninput="updateCategoryChart()">
+                        </div>
+                        <div class="category-item">
+                            <div style="font-size: 40px; margin-bottom: 10px;">📚</div>
+                            <strong>Educação</strong>
+                            <input type="number" id="catEducation" placeholder="R$ 0,00" oninput="updateCategoryChart()">
+                        </div>
+                        <div class="category-item">
+                            <div style="font-size: 40px; margin-bottom: 10px;">🛍️</div>
+                            <strong>Compras</strong>
+                            <input type="number" id="catShopping" placeholder="R$ 0,00" oninput="updateCategoryChart()">
+                        </div>
+                        <div class="category-item">
+                            <div style="font-size: 40px; margin-bottom: 10px;">💡</div>
+                            <strong>Outros</strong>
+                            <input type="number" id="catOthers" placeholder="R$ 0,00" oninput="updateCategoryChart()">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                    <div class="chart-container">
+                        <h3 style="margin-bottom: 15px;">📊 Despesas por Categoria</h3>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3 style="margin-bottom: 15px;">📈 Evolução Mensal</h3>
+                        <canvas id="evolutionChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="section">
+                <div class="profile-header">
+                    <div class="profile-avatar-large">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <h1 style="font-size: 32px; margin-bottom: 10px;" id="profileName">Nome do Usuário</h1>
+                        <p style="opacity: 0.9; font-size: 16px; margin-bottom: 15px;" id="profileEmail">email@exemplo.com</p>
+                        <div style="display: flex; gap: 20px;">
+                            <div style="background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 10px;">
+                                <div style="font-size: 24px; font-weight: 700;" id="profilePoints">0</div>
+                                <div style="font-size: 12px; opacity: 0.9;">Pontos</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 10px;">
+                                <div style="font-size: 24px; font-weight: 700;" id="profileStreak">0</div>
+                                <div style="font-size: 12px; opacity: 0.9;">Dias Seguidos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-info-section">
+                    <h2 style="margin-bottom: 20px; color: var(--dark);">👤 Informações Pessoais</h2>
+                    <div class="info-row">
+                        <div class="info-label">Nome Completo:</div>
+                        <div class="info-value" id="infoName">-</div>
+                        <button class="edit-profile-btn" onclick="editPersonalInfo('name')"><i class="fas fa-edit"></i></button>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Email:</div>
+                        <div class="info-value" id="infoEmail">-</div>
+                        <button class="edit-profile-btn" onclick="editPersonalInfo('email')"><i class="fas fa-edit"></i></button>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Data de Nascimento:</div>
+                        <div class="info-value" id="infoBirthdate">Não informado</div>
+                        <button class="edit-profile-btn" onclick="editPersonalInfo('birthdate')"><i class="fas fa-edit"></i></button>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Telefone:</div>
+                        <div class="info-value" id="infoPhone">Não informado</div>
+                        <button class="edit-profile-btn" onclick="editPersonalInfo('phone')"><i class="fas fa-edit"></i></button>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Endereço:</div>
+                        <div class="info-value" id="infoAddress">Não informado</div>
+                        <button class="edit-profile-btn" onclick="editPersonalInfo('address')"><i class="fas fa-edit"></i></button>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Tipo de Usuário:</div>
+                        <div class="info-value" id="infoUserType">Aluno</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Código da Sala:</div>
+                        <div class="info-value" id="infoClassCode">-</div>
+                    </div>
+                </div>
+
+                <div class="profile-info-section">
+                    <h2 style="margin-bottom: 20px; color: var(--dark);">📊 Estatísticas</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                        <div style="text-align: center; padding: 20px; background: var(--light); border-radius: 12px;">
+                            <div style="font-size: 32px; margin-bottom: 5px;">🏆</div>
+                            <div style="font-size: 24px; font-weight: 700; color: var(--primary);" id="statPoints">0</div>
+                            <div style="font-size: 12px; color: #6c809e;">Pontos Totais</div>
+                        </div>
+                        <div style="text-align: center; padding: 20px; background: var(--light); border-radius: 12px;">
+                            <div style="font-size: 32px; margin-bottom: 5px;">🎯</div>
+                            <div style="font-size: 24px; font-weight: 700; color: var(--success);" id="statQuizzes">0</div>
+                            <div style="font-size: 12px; color: #6c809e;">Quizzes Respondidos</div>
+                        </div>
+                        <div style="text-align: center; padding: 20px; background: var(--light); border-radius: 12px;">
+                            <div style="font-size: 32px; margin-bottom: 5px;">💰</div>
+                            <div style="font-size: 24px; font-weight: 700; color: var(--warning);" id="statSavings">R$ 0</div>
+                            <div style="font-size: 12px; color: #6c809e;">Total Economizado</div>
+                        </div>
+                        <div style="text-align: center; padding: 20px; background: var(--light); border-radius: 12px;">
+                            <div style="font-size: 32px; margin-bottom: 5px;">🎯</div>
+                            <div style="font-size: 24px; font-weight: 700; color: var(--danger);" id="statGoals">0</div>
+                            <div style="font-size: 12px; color: #6c809e;">Objetivos Criados</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Goals Section -->
+            <section id="goals" class="section">
+                <h1 style="color: white; margin-bottom: 30px; text-align: center;">🎯 Meus Objetivos Financeiros</h1>
+                
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <div style="background: white; padding: 40px; border-radius: 20px; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                        <h2 style="text-align: center; margin-bottom: 20px; color: var(--dark);">📝 Criar Novo Objetivo</h2>
+                        <p style="text-align: center; color: #6c809e; margin-bottom: 30px;">Defina suas metas financeiras e acompanhe o progresso!</p>
+                        
+                        <div class="form-group-login">
+                            <label>🎯 Nome do Objetivo</label>
+                            <input type="text" id="goalName" placeholder="Ex: Notebook, Viagem, Presente">
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="form-group-login">
+                                <label>💰 Valor Necessário (R$)</label>
+                                <input type="number" id="goalValue" placeholder="0.00">
+                            </div>
+
+                            <div class="form-group-login">
+                                <label>📅 Prazo (meses)</label>
+                                <input type="number" id="goalMonths" placeholder="0">
+                            </div>
+                        </div>
+
+                        <button class="btn-login" onclick="addGoal()">
+                            <i class="fas fa-plus-circle"></i> Criar Objetivo
+                        </button>
+                    </div>
+
+                    <div id="goalsList"></div>
+                </div>
+            </section>
+
+            <!-- Quiz Section -->
+            <section id="quiz" class="section">
+                <div class="quiz-container">
+                    <div class="quiz-header">
+                        <h2 style="margin-bottom: 5px;">🎯 Quiz de Educação Financeira</h2>
+                        <p class="quiz-number" style="margin: 0;">Pergunta <span id="currentQuizNum">1</span> de <span id="totalQuizNum">15</span></p>
+                    </div>
+                    
+                    <div class="quiz-question" id="quizQuestion">Carregando pergunta...</div>
+                    <div class="quiz-options" id="quizOptions"></div>
+                    
+                    <div id="quizResult" class="quiz-result" style="display: none;">
+                        <h3 id="resultText" style="margin-bottom: 10px;"></h3>
+                        <p id="resultExplanation" style="line-height: 1.6;"></p>
+                    </div>
+
+                    <div class="quiz-nav">
+                        <button class="quiz-nav-btn" id="prevQuizBtn" onclick="changeQuiz(-1)" disabled>
+                            <i class="fas fa-arrow-left"></i> Anterior
+                        </button>
+                        <button class="quiz-nav-btn" id="nextQuizBtn" onclick="changeQuiz(1)">
+                            Próxima <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <h3 style="margin-bottom: 15px;">📊 Seu Desempenho</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px;">
+                            <div style="font-size: 12px; color: #6c809e; margin-bottom: 5px;">Respondidos</div>
+                            <div style="font-size: 24px; font-weight: 700; color: var(--dark);" id="quizTotal">0</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px;">
+                            <div style="font-size: 12px; color: #6c809e; margin-bottom: 5px;">Acertos</div>
+                            <div style="font-size: 24px; font-weight: 700; color: var(--success);" id="quizCorrect">0</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px;">
+                            <div style="font-size: 12px; color: #6c809e; margin-bottom: 5px;">Taxa de Acerto</div>
+                            <div style="font-size: 24px; font-weight: 700; color: var(--primary);" id="quizRate">0%</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: var(--light); border-radius: 10px;">
+                            <div style="font-size: 12px; color: #6c809e; margin-bottom: 5px;">Pontos</div>
+                            <div style="font-size: 24px; font-weight: 700; color: var(--warning);" id="quizPoints">0</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ranking Section -->
+            <section id="ranking" class="section">
+                <div class="stat-card">
+                    <h2 style="margin-bottom: 10px;">🏆 Ranking da Sala <span id="rankingClassCode"></span></h2>
+                    <p style="color: #6c809e; margin-bottom: 30px;">Compete com seus colegas e veja quem está liderando!</p>
+                    <div id="rankingList"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Notification Panel -->
+    <div class="notification-panel" id="notificationPanel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2>🔔 Notificações</h2>
+            <button class="modal-close" onclick="toggleNotifications()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="notificationList"></div>
+    </div>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2>⚙️ Configurações</h2>
+            <button class="modal-close" onclick="toggleSettings()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div style="padding: 15px; background: var(--light); border-radius: 10px; margin-bottom: 20px;">
+            <div style="font-weight: 600; margin-bottom: 10px;">Notificações</div>
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input type="checkbox" checked> Receber notificações de novos quizzes
+            </label>
+        </div>
+        <div style="padding: 15px; background: var(--light); border-radius: 10px; margin-bottom: 20px;">
+            <div style="font-weight: 600; margin-bottom: 10px;">Tema</div>
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()"> Modo Escuro
+            </label>
+        </div>
+        <button class="btn-login" style="width: 100%;" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Sair da Conta
+        </button>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="editModalTitle">Editar</h2>
+                <button class="modal-close" onclick="closeModal('editModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="form-group-login">
+                <label id="editModalLabel">Valor</label>
+                <input type="text" id="editModalInput" placeholder="Digite o valor">
+            </div>
+            <button class="btn-login" onclick="saveEdit()">
+                <i class="fas fa-save"></i> Salvar
+            </button>
+        </div>
+    </div>
+
+    <script src="TCC.js"></script>
+</body>
+</html>
